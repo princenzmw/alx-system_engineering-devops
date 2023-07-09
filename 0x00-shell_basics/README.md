@@ -47,7 +47,7 @@ Task 14.
 	#!/bin/bash
 	cp -un +.html ../
 	
-feel free to contribute and communicate with me :
-	Email:princenzmw@gmail.com
-	Phone:+250781712081
+		feel free to contribute and communicate with me :
+			Email:princenzmw@gmail.com
+			Phone:+250781712081
 

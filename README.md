@@ -55,7 +55,7 @@ Create a script that copies all the HTML files from the current working director
 	You can consider that all HTML files have the extension .html
 
 
-feel free to contribute and communicate with me :
-	Email:princenzmw@gmail.com
-	Phone:+250781712081
+		feel free to contribute and communicate with me :
+			Email:princenzmw@gmail.com
+			Phone:+250781712081
 
