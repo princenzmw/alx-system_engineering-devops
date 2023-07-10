@@ -111,7 +111,7 @@ Write a script that will play the StarWars IV episode in the terminal.
 			sudo chown betty hello      
 			
 #Task 4.
-			#!bin/bash      
+			#!/bin/bash      
 			touch hello      
 			
 #Task 5.
@@ -120,11 +120,11 @@ Write a script that will play the StarWars IV episode in the terminal.
 			
 #Task 6.
 			#!/bin/bash      
-			chmod u+x g+x o+r hello      
+			chmod ug+x,o+r hello      
 			
 #Task 7.
-			#!/bin?bash      
-			chmod +x hello      
+			#!/bin/bash      
+			chmod ugo+x hello      
 			
 #Task 8.
 			#!/bin/bash      
