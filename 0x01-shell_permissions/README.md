@@ -1,41 +1,41 @@
 
-# This is the README file for the ALX Project (0x01 Shell, Permissions) done in git & github within this repository: alx-system_engineering-devops in the directory /0x01-shell_permissions/      
+This is the README file for the ALX Project (0x01 Shell, Permissions) done in git & github within this repository: alx-system_engineering-devops in the directory /0x01-shell_permissions/      
 
 The following are the tasks to complete. You can find their answers in this README file Bottom. Just keep Scrolling to get the complete Answers!      
 
 # Tasks       
-0. My name is Betty      
+# 0. My name is Betty      
 Create a script that switches the current user to the user betty.
 
-1. Who am I      
+# 1. Who am I      
 Write a script that prints the effective username of the current user.
 
-2. Groups     
+# 2. Groups     
 Write a script that prints all the groups the current user is part of.
 
-3. New owner     
+# 3. New owner     
 Write a script that changes the owner of the file hello to the user betty.
 
-4. Empty!     
+# 4. Empty!     
 Write a script that creates an empty file called hello.
 
-5. Execute     
+# 5. Execute     
 Write a script that adds execute permission to the owner of the file hello.      
 	
 	The file hello will be in the working directory
    
-6. Multiple permissions           
+# 6. Multiple permissions           
 Write a script that adds execute permission to the owner and the group owner, and read permission to other users, to the file hello.
 	
 	* The file hello will be in the working directory
 
-7. Everybody!           
+# 7. Everybody!           
 Write a script that adds execution permission to the owner, the group owner and the other users, to the file hello
 
 	* The file hello will be in the working directory      
 	* You are not allowed to use commas for this script      
 
-8. James Bond           
+# 8. James Bond           
 Write a script that sets the permission to the file hello as follows:
 
 	* Owner: no permission at all      
@@ -43,7 +43,7 @@ Write a script that sets the permission to the file hello as follows:
 	* Other users: all the permissions      
 The file hello will be in the working directory You are not allowed to use commas for this script
 
-9. John Doe           
+# 9. John Doe           
 Write a script that sets the mode of the file hello to this:      
 
 				-rwxr-x-wx 1 julien julien 23 Sep 20 14:25 hello      
@@ -51,102 +51,102 @@ Write a script that sets the mode of the file hello to this:
 	* The file hello will be in the working directory           
 	* You are not allowed to use commas for this script      
 
-10. Look in the mirror           
+# 10. Look in the mirror           
 Write a script that sets the mode of the file hello the same as olleh’s mode.      
 
 	* The file hello will be in the working directory     
 	* The file olleh will be in the working directory      
 Note: the mode of olleh will not always be 664. Make sure your script works for any mode.      
 
-11. Directories           
+# 11. Directories           
 Create a script that adds execute permission to all subdirectories of the current directory for the owner, the group owner and all other users.
 
 Regular files should not be changed.           
 
-12. More directories           
+# 12. More directories           
 Create a script that creates a directory called my_dir with permissions 751 in the working directory.      
 
-13. Change group           
+# 13. Change group           
 Write a script that changes the group owner to school for the file hello      
 
 	* The file hello will be in the working directory        
 
-14. Owner and group      
+# 14. Owner and group      
 Write a script that changes the owner to vincent and the group owner to staff       
 	* for all the files and directories in the working directory.
 
-15. Symbolic links      
+# 15. Symbolic links      
 Write a script that changes the owner and the group owner of _hello to vincent and staff respectively.
 
 	* The file _hello is in the working directory     
 	* The file _hello is a symbolic link
 
-16. If only      
+# 16. If only      
 Write a script that changes the owner of the file hello to betty only if it is owned by the user guillaume.
 
 	* The file hello will be in the working directory  
 
-17. Star Wars      
+# 17. Star Wars      
 Write a script that will play the StarWars IV episode in the terminal.
 
 
 -----------------------------------------------------------------------------------------------------------
 
-						#ANSWERS
+						# ANSWERS
 
-#Task 0.
+# Task 0.
 			#!/bin/bash      
 			su betty   
 			
-#Task 1.
+# Task 1.
 			#!/bin/bash      
 			whoami      
 			
-#Task 2.
+# Task 2.
 			#!/bin/bash      
 			groups      
 			
-#Task 3.
+# Task 3.
 			#!/bin/bash      
 			sudo chown betty hello      
 			
-#Task 4.
+# Task 4.
 			#!/bin/bash      
 			touch hello      
 			
-#Task 5.
+# Task 5.
 			#!/bin/bash      
 			chmod u+x hello      
 			
-#Task 6.
+# Task 6.
 			#!/bin/bash      
 			chmod ug+x,o+r hello      
 			
-#Task 7.
+# Task 7.
 			#!/bin/bash      
 			chmod ugo+x hello      
 			
-#Task 8.
+# Task 8.
 			#!/bin/bash      
 			chmod 007 hello      
 			
-#Task 9.
+# Task 9.
 			#!/bin/bash      
 			chmod 753 hello      
 			
-#Task 10.
+# Task 10.
 			#!/bin/bash      
 			chmod --reference olleh hello      
 			
-#Task 11.
+# Task 11.
 			#!/bin/bash      
 			chmod a+x */       
 			
-#Task 12.
+# Task 12.
 			#!/bin/bash      
 			mkdir -m 751 my_dir      
 			
-#Task 13.
+# Task 13.
 			#!/bin/bash      
 			chgrp school hello
 
@@ -154,21 +154,21 @@ Write a script that will play the StarWars IV episode in the terminal.
 	
 For #ADVANCED Answers below they are:
 
-#Task 14.
+# Task 14.
 			#!/bin/bash      
 			chown vincent:staff *      
 			
-#Task 15.
+# Task 15.
 			#!/bin/bash      
 			chown -h vincent:staff _hello      
 			
-#Task 16.
+# Task 16.
 			#!/bin/bash      
 			chown --from=guillaume betty hello      
 			
-#Task 17.
+# Task 17.
 			#!/bin/bash      
-			telnet towel.blinkenlights.nl
+			telnet towel.blinkenlights.nl     
 
 	
 
