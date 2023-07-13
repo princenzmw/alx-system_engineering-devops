@@ -51,112 +51,112 @@ The Following are the Tasks to complete. their answers are below, keep scrolling
 		
 | `102-water_and_str` | Adds the two numbers stored in the environment variables `WATER` and `STIR` and prints the result |    
 
+==========   
+0-alias   
 
-0-alias
-
-#!/bin/bash
+#!/bin/bash   
 alias ls="rm *"
 
-==========
-1-hello_you
+==========   
+1-hello_you   
 
-#!/bin/bash
+#!/bin/bash   
 echo "hello $USER"
 
-==========
-2-path
+==========   
+2-path   
 
-#!/bin/bash
+#!/bin/bash   
 export PATH=$PATH:/action
 
-==========
+==========   
 3-paths
 
-#!/bin/bash
+#!/bin/bash   
 echo $((`echo $PATH | grep -o ":/" | wc -l`+ 1))
 
-==========
+==========   
 4-global_variables
 
-#!/bin/bash
+#!/bin/bash   
 printenv
 
-==========
+==========   
 5-local_variables
 
-#!/bin/bash
+#!/bin/bash   
 set
 
-==========
+==========   
 6-create_local_variable
 
-#!/bin/bash
+#!/bin/bash   
 BEST="School"
 
-==========
+==========   
 7-create_global_variable
 
-#!/bin/bash
-echo $(($BEST School))
+#!/bin/bash   
+export BEST="School"    
 
-==========
+==========   
 8-true_knowledge
 
-#!/bin/bash
+#!/bin/bash   
 echo $(($TRUEKNOWLEDGE + 128))
 
-==========
+==========   
 9-divide_and_rule
 
-#!/bin/bash
+#!/bin/bash   
 echo $(($POWER / $DIVIDE))
 
-==========
+==========   
 10-love_exponent_breath
 
-#!/bin/bash
+#!/bin/bash   
 echo $((BREATH**$LOVE))
 
-==========
+==========    
 11-binary_to_decimal
 
-#!/bin/bash
-echo $((2#BINARY)o)
+#!/bin/bash   
+printf "%d\n" $BINARY    
 
-==========
+==========   
 12-combinations
 
-#!/bin/bash
+#!/bin/bash   
 echo {a..z}{a..z} | tr " " "\n" | grep -v "oo"
 
-==========
+==========   
 13-print_float
 
-#!/bin/bash
+#!/bin/bash   
 printf "%.2f" $NUM | sort
 
-==========
+==========   
 100-decimal_to_hexadecimal
 
-#!/bin/bash
+#!/bin/bash   
 printf '%x\n' $DECIMAL
 
-==========
+==========   
 101-rot13
 
-#!/bin/bash
-tr `echo {a..z} | tr -d ' '` `echo {n..z} $(echo {a..m} | tr -d ' '` | tr `echo {A..Z} | tr -d ' '` `echo {N..Z} $(echo {A..M}) | tr -d ' '`
+#!/bin/bash   
+tr 'A-Za-z' 'N-ZA-Mn-za-m'    
 
-==========
+==========   
 102-odd
 
-#!/bin/bash
-perl -lne 'print if $. % 2 ==1'
+#!/bin/bash   
+perl -lne 'print if $. % 2 ==1'    
 
-==========
+==========   
 103-water_and_stir
 
-#!/bin/bash
+#!/bin/bash   
 echo $(printf %o $(($((5#$(echo $WATER | tr 'water' '01234'))) + $((5#$(echo $STIR | tr 'stir.' '01234'))))) | tr '01234567' 'bestchol')   
 
 
