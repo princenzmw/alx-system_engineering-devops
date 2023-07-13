@@ -121,7 +121,7 @@ echo $((BREATH**$LOVE))
 11-binary_to_decimal
 
 #!/bin/bash   
-printf "%d\n" $BINARY    
+echo "$((2#$BINARY))"    
 
 ==========   
 12-combinations
