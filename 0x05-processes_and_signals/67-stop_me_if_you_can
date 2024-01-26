@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# A Bash script that stops the '7-highlander' process
+
+# This is a copy of your '6-stop_me_if_you_can' script,
+#+  kills the '7-highlander' process instead of the '4-to_infinity_and_beyond'
+# You cannot use 'kill' or 'killall'
+
+pkill -f 7-highlander
