@@ -34,4 +34,4 @@ At the end of this project, you are expected to be able to explain to anyone, wi
 - What is the main difference between TCP and UDP
 - What is a port
 - Memorize SSH, HTTP and HTTPS port numbers
-- What tool/protocol is often used to check if a device is connected to a network
+- What tool/protocol is often used to check if a device is connected to a network.
