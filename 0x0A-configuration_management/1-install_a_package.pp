@@ -4,8 +4,8 @@ exec { 'update':
 }
 
 package { 'python3-pip':
-  ensure   => installed,
-  require  => Exec['update']
+  ensure  => installed,
+  require => Exec['update']
 }
 
 exec { 'install flask':
