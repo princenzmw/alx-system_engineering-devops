@@ -17,8 +17,8 @@ frontend  prinko_frontend
         default_backend prinko_backend
 backend prinko_backend
         balance roundrobin
-        server 211092-web-01 35.153.67.87:80 check
-        server 211092-web-02 100.26.240.141:80 check
+        server 462126-web-01 35.153.67.87:80 check
+        server 462126-web-02 100.26.240.141:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
