@@ -15,17 +15,15 @@ sudo apt-get update
 sudo apt-get -y install haproxy
 
 # Enable HAProxy to start on boot
-# systemctl enable haproxy
-sudo service haproxy enable
+sudo systemctl enable haproxy
 
-# Configuring HAProxy
-cat > /etc/haproxy/haproxy.cfg <<EOF
+# Writing new HAProxy configuration.
+sudo bash -c 'cat << EOF > /etc/haproxy/haproxy.cfg
 global
-    log /dev/log    local0
-    log /dev/log    local1 notice
+    log /dev/log local0
+    log /dev/log local1 notice
     chroot /var/lib/haproxy
     stats socket /run/haproxy/admin.sock mode 660 level admin
-    stats timeout 30s
     user haproxy
     group haproxy
     daemon
@@ -39,24 +37,18 @@ defaults
     timeout client  50000ms
     timeout server  50000ms
 
-# Define frontend configuration
 frontend http_front
-   bind *:80
-   stats uri /haproxy?stats
-   default_backend http_back
+    bind *:80
+    default_backend http_back
 
-# Define backend configuration
 backend http_back
     balance roundrobin
-    server 462126-web-01 $WEB01:80 check
-    server 462126-web-02 $WEB02:80 check
-EOF
+    server 462126-web-01 35.153.67.87:80 check
+    server 462126-web-02 100.26.240.141:80 check
+EOF'
 
-# enable haproxy to be started by init script
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+# Check the new HAProxy configuration for errors.
+sudo haproxy -f /etc/haproxy/haproxy.cfg -c
 
-# Testing the HAproxy configuration file
-sudo haproxy -c -V -f /etc/haproxy/haproxy.cfg
-
-# Restart the Nginx service
-sudo service haproxy restart
+# Reload HAProxy service to apply the new configuration.
+sudo systemctl reload haproxy
