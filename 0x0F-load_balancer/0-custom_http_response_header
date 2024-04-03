@@ -2,23 +2,23 @@
 # Customizing a 404-error_page
 
 # Updating Packages before performing installations
-apt-get update
+sudo apt-get update
 
 # Installs nginx server
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 
 # Creating an index.html page
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Start nginx after installation
-service nginx start
+sudo service nginx start
 
 # Using Sed to add a custom redirect page (redirect_me/) into the Nginx configurion
 sudo sed -i '/server_name _;/a \\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}' /etc/nginx/sites-available/default
 
 # Create a custom 404 error HTML file
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
 # Using Sed to add a custom 404 error page into the Nginx configuration
 sudo sed -i '/listen 80 default_server;/a \\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}' /etc/nginx/sites-enabled/default
