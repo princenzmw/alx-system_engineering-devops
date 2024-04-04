@@ -6,8 +6,7 @@ sudo apt-get update
 
 # Installs nginx server
 sudo apt-get -y install nginx
-sudo apt-get install ufw -y
-ufw allow 'Nginx HTTP'
+sudo ufw allow 'Nginx HTTP'
 
 # Creating an index.html page
 echo "Hello World!" | sudo tee /var/www/html/index.html
@@ -22,7 +21,7 @@ echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 sudo sed -i '/listen 80 default_server;/a \\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}' /etc/nginx/sites-enabled/default
 
 # Creating an HTTP response header and ensuring $hostname expands properly
-sudo sed -i "/server_name _;/a \\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default
+sudo sed -i "/server {/a \\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default
 
 # Restart nginx after implementing changes
 sudo service nginx restart
