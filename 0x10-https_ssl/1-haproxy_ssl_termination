@@ -13,7 +13,7 @@ global
         crt-base /etc/ssl/private
 
         # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
-        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-S>
         ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
         ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
 
@@ -33,21 +33,19 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend http_front
+frontend prinko-frontend
         bind *:80
-        bind *:443 ssl crt /etc/letsencrypt/live/www.prinko.tech/fullchain.pem
+        mode http
+        http-request redirect scheme https code 301 unless { ssl_fc }
+        http-request set-header X_Forwarded-Proto http
+        default_backend prinko-backend
 
-        redirect scheme https if !{ ssl_fc }
-        acl www_domain hdr(host) -i www.prinko.tech
-        use_backend www_backend if www_domain
+frontend prinko-frontend-https
+        bind *:443 ssl crt /etc/haproxy/certs/www.prinko.tech.pem
+        http-request set-header X-Forwarded-Proto https
+        default_backend prinko-backend
 
-backend www_backend
-        balance roundrobin
-        server 462126-web-01 35.153.67.87:80 check
-        server 462126-web-02 100.26.240.141:80 check
-
-listen http-in
-        bind :80
+backend prinko-backend
         balance roundrobin
         server 462126-web-01 35.153.67.87:80 check
         server 462126-web-02 100.26.240.141:80 check
