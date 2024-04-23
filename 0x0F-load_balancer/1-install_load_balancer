@@ -1,23 +1,20 @@
 #!/usr/bin/env bash
-# A bash script that Install and configure HAproxy on lb-01 server
-# Configure HAProxy to send traffic to web-01 and web-02 servers
-# Distribute requests using a roundrobin algorithm
-# Make sure that HAProxy can be managed via an init script
+# A bash script to install and configure HAProxy on an Ubuntu server
 
 # Update package lists
 sudo apt-get update
 
-# Install HAProxy.
+# Install HAProxy
 sudo apt-get install -y haproxy
 
-# Enable HAProxy to start at boot.
-sudo systemctl enable haproxy
+# Enable HAProxy to start at boot
+sudo update-rc.d haproxy defaults
 
-# Backup the original HAProxy configuration file.
+# Backup the original HAProxy configuration file
 sudo cp /etc/haproxy/haproxy.cfg{,.backup}
 
-# Writing new HAProxy configuration.
-sudo bash -c 'cat << EOF > /etc/haproxy/haproxy.cfg
+# Write new HAProxy configuration
+cat << EOF | sudo tee /etc/haproxy/haproxy.cfg
 global
     log /dev/log local0
     log /dev/log local1 notice
@@ -51,14 +48,14 @@ frontend http_front
 
 backend http_back
     balance roundrobin
-    http-response set-header X-Served-By 03-web-01 if { srv_id 1 }
-    http-response set-header X-Served-By 03-web-02 if { srv_id 2 }
     server 462126-web-01 35.153.67.87:80 check
     server 462126-web-02 100.26.240.141:80 check
-EOF'
+EOF
 
-# Check the new HAProxy configuration for errors.
-sudo haproxy -f /etc/haproxy/haproxy.cfg -c
-
-# Reload HAProxy service to apply the new configuration.
-sudo systemctl reload haproxy
+# Check the new HAProxy configuration for errors
+if sudo haproxy -f /etc/haproxy/haproxy.cfg -c; then
+    # Restart HAProxy service to apply the new configuration if the config is valid
+    sudo service haproxy restart
+else
+    echo "The new HAProxy configuration has syntax errors."
+fi
