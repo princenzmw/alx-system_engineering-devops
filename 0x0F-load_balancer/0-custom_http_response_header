@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Customizing a 404-error_page
+# Configure a new ubuntu server 
 
 # Updating Packages before performing installations
 sudo apt-get update
 
 # Installs nginx server
 sudo apt-get -y install nginx
+sudo apt-get install -y ufw
 sudo ufw allow 'Nginx HTTP'
 
 # Creating an index.html page
@@ -18,10 +19,13 @@ sudo sed -i '/server_name _;/a \\tlocation /redirect_me {\n\t\treturn 301 https:
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
 # Using Sed to add a custom 404 error page into the Nginx configuration
-sudo sed -i '/listen 80 default_server;/a \\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}' /etc/nginx/sites-enabled/default
+sudo sed -i '/listen 80 default_server;/a \\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}' /etc/nginx/sites-available/default
 
 # Creating an HTTP response header and ensuring $hostname expands properly
-sudo sed -i "/server {/a \\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default
+sudo sed -i "/server {/a \\\tadd_header X-Served-By $HOSTNAME always;" /etc/nginx/sites-available/default
+
+# Create a link to the sites-enabled directory
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
 # Restart nginx after implementing changes
 sudo service nginx restart
